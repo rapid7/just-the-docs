@@ -48,42 +48,7 @@ layout: table_wrappers
       </a>
     </div>
     <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav">
-      {% assign pages_top_size = site.html_pages
-          | where_exp:"item", "item.title != nil"
-          | where_exp:"item", "item.parent == nil"
-          | where_exp:"item", "item.nav_exclude != true"
-          | size %}
-      {% if pages_top_size > 0 %}
-        {% include nav.html pages=site.html_pages key=nil %}
-      {% endif %}
-      {% if site.just_the_docs.collections %}
-        {% assign collections_size = site.just_the_docs.collections | size %}
-        {% for collection_entry in site.just_the_docs.collections %}
-          {% assign collection_key = collection_entry[0] %}
-          {% assign collection_value = collection_entry[1] %}
-          {% assign collection = site[collection_key] %}
-          {% if collection_value.nav_exclude != true %}
-            {% if collections_size > 1 or pages_top_size > 0 %}
-              {% if collection_value.nav_fold == true %}
-                <ul class="nav-list">
-                  <li class="nav-list-item{% if page.collection == collection_key %} active{% endif %}">
-                    {%- if collection.size > 0 -%}
-                    <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
-                    {%- endif -%}
-                    <div class="nav-category">{{ collection_value.name }}</div>
-                    {% include nav.html pages=collection key=collection_key %}
-                  </li>
-                </ul>
-              {% else %}
-                <div class="nav-category">{{ collection_value.name }}</div>
-                {% include nav.html pages=collection key=collection_key %}
-              {% endif %}
-            {% else %}
-              {% include nav.html pages=collection key=collection_key %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+      {% include nav/main.html %}
     </nav>
     <footer class="site-footer">
       This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
@@ -120,21 +85,11 @@ layout: table_wrappers
       {% endif %}
     </div>
     <div id="main-content-wrap" class="main-content-wrap">
-      {% unless page.url == "/" %}
-        {% if page.parent %}
-          <nav aria-label="Breadcrumb" class="breadcrumb-nav">
-            <ol class="breadcrumb-nav-list">
-              {% if page.grand_parent %}
-                <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.grand_parent }}</a></li>
-                <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ page.parent }}</a></li>
-              {% else %}
-                <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.parent }}</a></li>
-              {% endif %}
-              <li class="breadcrumb-nav-list-item"><span>{{ page.title }}</span></li>
-            </ol>
-          </nav>
-        {% endif %}
-      {% endunless %}
+
+      {% if page.parent and page.url != "/" %}
+        {% include nav/crumbs.html nodes=nav_page_ancestors %}
+      {% endif %}
+
       <div id="main-content" class="main-content" role="main">
         {% if site.heading_anchors != false %}
           {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#svg-link\"></use></svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
@@ -142,17 +97,9 @@ layout: table_wrappers
           {{ content }}
         {% endif %}
 
-        {% if page.has_children == true and page.has_toc != false %}
-          <hr>
-          <h2 class="text-delta">Table of contents</h2>
-          <ul>
-            {% for child in toc_list %}
-              <li>
-                <a href="{{ child.url | absolute_url }}">{{ child.title }}</a>{% if child.summary %} - {{ child.summary }}{% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+        {% unless page.has_toc == false %}
+          {% include nav/toc.html nodes=nav_page_children %}
+        {% endunless %}
 
         {% capture footer_custom %}
           {%- include footer_custom.html -%}
