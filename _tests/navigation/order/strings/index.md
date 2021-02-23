@@ -1,9 +1,7 @@
 ---
-layout: default
 title: Strings
 parent: Order
 nav_order: 2
-has_children: true
 ---
 
 # String Order

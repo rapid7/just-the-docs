@@ -1,8 +1,6 @@
 ---
-layout: default
 title: A
 parent: Mixture
-grand_parent: Order
 ---
 
 # A
@@ -10,5 +8,4 @@ grand_parent: Order
 ```yaml
 title: A
 parent: Mixture
-grand_parent: Order
 ```

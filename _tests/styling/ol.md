@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Ordered lists
 parent: Styling
-grand_parent: Tests Home
 ---
 
 # Ordered lists

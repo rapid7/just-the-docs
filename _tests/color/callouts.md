@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Callouts
 parent: Color
-grand_parent: Tests Home
 ---
 
 # Callouts

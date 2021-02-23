@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Description lists
 parent: Styling
-grand_parent: Tests Home
 ---
 
 # Description lists

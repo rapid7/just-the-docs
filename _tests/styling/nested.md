@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Nested lists
 parent: Styling
-grand_parent: Tests Home
 ---
 
 # Nested lists

@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Unordered lists
 parent: Styling
-grand_parent: Tests Home
 ---
 
 # Unordered lists

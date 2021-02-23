@@ -1,9 +1,7 @@
 ---
-layout: default
 title: Aa
 nav_order: "Aa"
 parent: Mixture
-grand_parent: Order
 ---
 
 # Aa
@@ -12,5 +10,4 @@ grand_parent: Order
 title: Aa
 nav_order: "Aa"
 parent: Mixture
-grand_parent: Order
 ```

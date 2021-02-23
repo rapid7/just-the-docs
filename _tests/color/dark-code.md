@@ -1,8 +1,6 @@
 ---
-layout: default
 title: Dark Code
 parent: Color
-grand_parent: Tests Home
 ---
 
 # Dark Code

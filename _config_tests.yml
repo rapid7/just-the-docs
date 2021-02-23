@@ -54,6 +54,14 @@ just_the_docs:
       nav_exclude: true
       search_exclude: true
 
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "tests"
+    values:
+      layout: "default"
+
 # callouts_opacity: 0.15
 # callouts_level: loud
 
