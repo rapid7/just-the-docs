@@ -255,3 +255,18 @@ just_the_docs:
 When *all* your pages are in a single collection, its name is not displayed.
 
 The navigation for each collection is a separate name space for page titles: a page in one collection cannot be a child of a page in a different collection, or of a normal page.
+
+By default, the navigation panel always shows links to all the top-level pages in all collections.
+You can configure whether individual collections appear folded, e.g.:
+```yaml
+just_the_docs:
+  collections:
+    tests:
+      name: Tests
+      nav_fold: true
+    tutorials:
+      name: Tutorials
+      nav_fold: false
+```
+Clicking the expander mark next to the name of a folded collection reveals the links to its top-level pages.
+Visiting any page in a folded collection reveals those links, and hides the links for all other folded collections.
