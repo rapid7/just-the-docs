@@ -84,6 +84,18 @@ aux_links_new_tab: false
 heading_anchors: true
 ```
 
+## Parent and sibling links
+
+```yaml
+# Include links to parent and sibling pages when showing the automatic TOC
+nav_next_prev: true
+#
+# The default arrows can be changed to other characters or words
+# nav_prev_text: "&#8678;" # ⇦
+# nav_up_text:   "&#8679;" # ⇧
+# nav_next_text: "&#8680;" # ⇨
+```
+
 ## Footer content
 
 ```yaml

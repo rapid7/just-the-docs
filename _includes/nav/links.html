@@ -7,6 +7,8 @@
   outputs links for non-excluded nodes and their children. The links for an
   inactive node are independent of the path to the current page, but only those
   for top-level nodes are cached.
+	
+	Sets nav_page_prev and nav_page_next (maybe to nil) for use by nav/toc.html.
 {%- endcomment -%}
 
 {%- include nav/sorted.html
@@ -14,6 +16,20 @@
   
 <ul class="nav-list">
 {%- for node in nav_sorted -%}
+  
+	{%- if node.url == page.url and site.nav_next_prev -%}
+		{%- assign nav_page_prev = nil -%}
+		{%- unless forloop.first -%}
+			{%- assign nav_prev_index = forloop.index0 | minus: 1 -%}
+			{%- assign nav_page_prev = nav_sorted[nav_prev_index] -%}
+		{%- endunless -%}
+		{%- assign nav_page_next = nil -%}
+		{%- unless forloop.last -%}
+			{%- assign nav_next_index = forloop.index0 | plus: 1 -%}
+			{%- assign nav_page_next = nav_sorted[nav_next_index] -%}
+		{%- endunless -%}
+	{%- endif -%}
+	
   {%- unless node.nav_exclude == true -%}
 
 {%- capture nav_newline %}
