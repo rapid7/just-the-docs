@@ -1,8 +1,8 @@
 ---
-title: Navigation Notes
-nav_exclude: true
+title: Notes
+parent: Recursion
 ---
-# Recursive navigation Notes
+# Notes
 
 ## Background
 
