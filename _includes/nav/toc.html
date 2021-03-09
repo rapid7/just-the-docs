@@ -3,30 +3,30 @@
         nodes = array -%}
   outputs a table of contents with navigation links to the nodes, unless empty.
   The heading for the table can be configured by setting `site.toc_heading`.
-	
-	If `site.nav_next_prev` is true, it also outputs links for navigation to the
-	previous and next sibling pages and to the parent page, using variables set
-	by nav/links.html. The link text/symbols can be configured by setting
-	`nav_prev_text`, `nav_up_text`, and `nav_next_text` in `_config.yml`; the
-	defaults are arrow symbols.
+  
+  If `site.nav_next_prev` is true, it also outputs links for navigation to the
+  previous and next sibling pages and to the parent page, using variables set
+  by nav/links.html. The link text/symbols can be configured by setting
+  `nav_prev_text`, `nav_up_text`, and `nav_next_text` in `_config.yml`; the
+  defaults are arrow symbols.
 {%- endcomment -%}
 
 {%- if site.nav_next_prev or include.nodes.size >= 1 -%}
   <hr>
 {% endif %}
-	
+  
 {% if site.nav_next_prev %}
-	<p class="nav-rel">
-		{% if nav_page_prev %}
-			<a href="{{ nav_page_prev.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&#8678;" }}</a>
-		{% endif %}
-		{% if nav_page_ancestors.size > 0 %}
-			<a href="{{ nav_page_ancestors.last.url | absolute_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&#8679;" }}</a>
-		{% endif %}
-		{% if nav_page_next %}
-			<a href="{{ nav_page_next.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&#8680;" }}</a>
-		{% endif %}
-	</p>
+  <p class="nav-rel">
+    {% if nav_page_prev %}
+      <a href="{{ nav_page_prev.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
+    {% endif %}
+    {% if nav_page_ancestors.size > 0 %}
+      <a href="{{ nav_page_ancestors.last.url | absolute_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&uarr;" }}</a>
+    {% endif %}
+    {% if nav_page_next %}
+      <a href="{{ nav_page_next.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
+    {% endif %}
+  </p>
 {% endif %}
 
 {%- if include.nodes.size >= 1 -%}

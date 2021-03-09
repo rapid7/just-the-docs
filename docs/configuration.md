@@ -91,9 +91,9 @@ heading_anchors: true
 nav_next_prev: true
 #
 # The default arrows can be changed to other characters or words
-# nav_prev_text: "&#8678;" # ⇦
-# nav_up_text:   "&#8679;" # ⇧
-# nav_next_text: "&#8680;" # ⇨
+# nav_prev_text: "&larr;"
+# nav_up_text:   "&uarr;"
+# nav_next_text: "&rarr;"
 ```
 
 ## Footer content

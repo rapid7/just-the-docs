@@ -86,9 +86,7 @@ layout: table_wrappers
     </div>
     <div id="main-content-wrap" class="main-content-wrap">
 
-      {% if page.parent and page.url != "/" %}
-        {% include nav/crumbs.html nodes=nav_page_ancestors %}
-      {% endif %}
+      {% include nav/crumbs.html nodes=nav_page_ancestors %}
 
       <div id="main-content" class="main-content" role="main">
         {% if site.heading_anchors != false %}
