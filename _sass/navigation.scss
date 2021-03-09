@@ -242,8 +242,12 @@
 
 nav.nav-rel {
   float: right;
-  margin-top: -$sp-4;
   margin-bottom: $sp-3;
+  
+  @include mq(md) {
+    margin-top: -$sp-4;
+  }
+
 }
 
 // Bottom relative links
