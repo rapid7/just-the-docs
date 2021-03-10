@@ -1,7 +1,8 @@
 {%- comment -%}
   {%- include nav/collection.html 
         pages = array
-        key = name_or_nil -%}
+        key = name_or_nil
+        page = page -%}
   outputs the main navigation links for `pages`. It also assigns arrays of pages
   to variables inspected by `nav/crumbs` and `nav/toc`.
   
@@ -44,9 +45,9 @@
 
 {%- assign nav_page_path = nil -%}
 
-{%- if include.key == nil or include.key == page.collection -%}
+{%- if include.key == nil or include.key == include.page.collection -%}
 
-  {%- assign nav_page_dir = page.path | split: "/" | pop | join: "/" -%}
+  {%- assign nav_page_dir = include.page.path | split: "/" | pop | join: "/" -%}
   {%- assign nav_ancestors = "" | split: "X" -%}
 
 {%- capture nav_newline %}
@@ -57,7 +58,8 @@
         nodes = nav_top_nodes
         ancestors = nav_ancestors
         path = nav_newline
-        in_section = nil -%}
+        in_section = nil
+        page = include.page -%}
 
   {%- unless nav_page_path -%}
     {%- include nav/page.html
@@ -65,13 +67,18 @@
           nodes = nav_top_nodes
           ancestors = nav_ancestors
           path = nav_newline
-          in_section = nil -%}
+          in_section = nil
+          page = include.page -%}
   {%- endunless -%}
   
 {%- endif -%}
 
+{%- include nav/sorted.html
+      nodes = nav_top_nodes -%}
+
 {%- include nav/links.html
-      nodes = nav_top_nodes
+      nodes = nav_sorted
       path = nav_newline 
       in_section = nil
-      pages = include.pages -%}
+      pages = include.pages
+      page = include.page -%}

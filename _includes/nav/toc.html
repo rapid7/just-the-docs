@@ -1,6 +1,10 @@
 {%- comment -%}
   {%- include nav/toc.html
-        nodes = array -%}
+        nodes = array
+        prev_page = page_or_nil
+        next_page = page_or_nil
+        parent_page = page_or_nil
+        page = page -%}
   outputs a table of contents with navigation links to the nodes, unless empty.
   The heading for the table can be configured by setting `site.toc_heading`.
   
@@ -17,14 +21,14 @@
   
 {% if site.nav_next_prev %}
   <p class="nav-rel">
-    {% if nav_page_prev %}
-      <a href="{{ nav_page_prev.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
+    {% if include.prev_page %}
+      <a href="{{ include.prev_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
     {% endif %}
-    {% if nav_page_ancestors.size > 0 %}
-      <a href="{{ nav_page_ancestors.last.url | absolute_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&uarr;" }}</a>
+    {% if include.parent_page %}
+      <a href="{{ include.parent_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&uarr;" }}</a>
     {% endif %}
-    {% if nav_page_next %}
-      <a href="{{ nav_page_next.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
+    {% if include.next_page %}
+      <a href="{{ include.next_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
     {% endif %}
   </p>
 {% endif %}

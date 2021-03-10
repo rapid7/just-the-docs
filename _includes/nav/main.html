@@ -1,5 +1,6 @@
 {%- comment -%}
-  {%- include nav/main.html -%}
+  {%- include nav/main.html 
+         page = page -%}
   outputs links for the main navigation. It also locates the current page in the
   navigation hierarchy, and assigns to the variables `nav_page_ancestors`,
   `nav_page_path`, and `nav_page_children`.
@@ -17,7 +18,8 @@
 {%- if pages_top_size > 0 -%}
   {%- include nav/collection.html
         pages = site.html_pages
-        key = nil -%}
+        key = nil
+        page = include.page -%}
 {%- endif -%}
 
 {%- if site.just_the_docs.collections -%}
@@ -38,14 +40,16 @@
               <div class="nav-category">{{ collection_value.name }}</div>
               {%- include nav/collection.html
                     pages = collection
-                    key = collection_key -%}
+                    key = collection_key
+                    page = include.page -%}
             </li>
           </ul>
         {% else %}
           <div class="nav-category">{{ collection_value.name }}</div>
           {%- include nav/collection.html
                 pages = collection
-                key = collection_key -%}
+                key = collection_key
+                page = include.page -%}
         {%- endif -%}
       {%- endif -%}
     {%- endif -%}

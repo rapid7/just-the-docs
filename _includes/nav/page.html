@@ -4,7 +4,8 @@
         nodes = array 
         ancestors = array
         path = string 
-        in_section = value_or_nil -%}
+        in_section = value_or_nil
+        page = page -%}
   searches for the location of the current page in the part of the navigation
   for the `nodes` parameter, using `nav_parenthood` for finding child pages.
   When the current page is located, `nav/page` assigns values to
@@ -44,7 +45,7 @@
     
       {%- assign nav_path =  include.path | append: node.title | append: nav_newline -%}
       
-      {%- if node.url == page.url -%}
+      {%- if node.url == include.page.url -%}
         {%- assign nav_page_ancestors = include.ancestors -%}
         {%- assign nav_page_path = nav_path -%}
         {%- assign nav_direct = true -%}
@@ -61,7 +62,8 @@
               nodes = nav_children
               ancestors = nav_children_ancestors
               path = nav_path
-              in_section = nav_section -%}
+              in_section = nav_section
+              page = include.page -%}
       {%- endif -%}
     
     {%- endif -%}
