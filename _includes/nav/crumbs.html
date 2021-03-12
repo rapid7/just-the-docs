@@ -6,11 +6,16 @@
         parent_page = page_or_nil
         page = page -%}
   outputs breadcrumb navigation links for the nodes, and the title of the current page.
-  Also outputs sibling and parent links, except for a top-level excluded page.
+  
+  If `site.nav_next_prev` is true, it also outputs links for navigation to the
+  previous and next sibling pages and to the parent page, using variables set
+  by nav/links.html. The link text/symbols can be configured by setting
+  `nav_prev_text`, `nav_up_text`, and `nav_next_text` in _config.yml; the
+  defaults are the ordinary arrow symbols.
 {%- endcomment -%}
 
 {% if site.nav_next_prev %}
-{% unless include.page.parent == nil and include.page.nav_exclude %}
+{% unless include.parent_page == nil and include.page.nav_exclude %}
 <nav class="nav-rel">
   {% if include.prev_page %}
     <a href="{{ include.prev_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>

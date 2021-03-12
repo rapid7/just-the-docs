@@ -9,7 +9,9 @@
   inactive node are independent of the path to the current page, but only those
   for top-level nodes are cached.
   
-  Sets nav_page_prev and nav_page_next (maybe to nil) for use by nav/toc.html.
+  Also sets nav_page_prev and nav_page_next (maybe to nil) for use by 
+  nav/crumbs.html and nav/toc.html. Excluded nodes are skipped at the top level,
+  but not at lower levels.
 {%- endcomment -%}
 
 <ul class="nav-list">
@@ -19,18 +21,23 @@
     {%- assign nav_page_prev = nil -%}
     {%- unless forloop.first -%}
       {%- assign nav_prev_index = forloop.index0 | minus: 1 -%}  
-      {%- assign nav_prev_node = include.nodes[nav_prev_index] -%}
-      {%- unless nav_prev_node.parent == nil and nav_prev_node.nav_exclude -%}
-        {%- assign nav_page_prev = nav_prev_node -%}
-      {%- endunless -%}
+      {%- for index in (0..nav_prev_index) reversed -%}
+        {%- if include.nodes[index].parent or include.nodes[index].nav_exclude != true -%}
+          {%- assign nav_page_prev = include.nodes[index] -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
     {%- endunless -%}
     {%- assign nav_page_next = nil -%}
     {%- unless forloop.last -%}
       {%- assign nav_next_index = forloop.index0 | plus: 1 -%}
-      {%- assign nav_next_node = include.nodes[nav_next_index] -%}
-      {%- unless nav_next_node.parent == nil and nav_next_node.nav_exclude -%}
-        {%- assign nav_page_next = nav_next_node -%}
-      {%- endunless -%}
+      {%- assign nav_last_index = include.nodes.size | minus: 1 -%}
+      {%- for index in (nav_next_index..nav_last_index) -%}
+        {%- if include.nodes[index].parent or include.nodes[index].nav_exclude != true -%}
+          {%- assign nav_page_next = include.nodes[index] -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
     {%- endunless -%}
   {%- endif -%}
   

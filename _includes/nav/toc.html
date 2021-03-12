@@ -11,8 +11,8 @@
   If `site.nav_next_prev` is true, it also outputs links for navigation to the
   previous and next sibling pages and to the parent page, using variables set
   by nav/links.html. The link text/symbols can be configured by setting
-  `nav_prev_text`, `nav_up_text`, and `nav_next_text` in `_config.yml`; the
-  defaults are arrow symbols.
+  `nav_prev_text`, `nav_up_text`, and `nav_next_text` in _config.yml; the
+  defaults are the ordinary arrow symbols.
 {%- endcomment -%}
 
 {%- if site.nav_next_prev or include.nodes.size >= 1 -%}
@@ -20,6 +20,7 @@
 {% endif %}
   
 {% if site.nav_next_prev %}
+{% unless include.parent_page == nil and include.page.nav_exclude %}
   <p class="nav-rel">
     {% if include.prev_page %}
       <a href="{{ include.prev_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
@@ -31,6 +32,7 @@
       <a href="{{ include.next_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
     {% endif %}
   </p>
+{% endunless %}
 {% endif %}
 
 {%- if include.nodes.size >= 1 -%}
