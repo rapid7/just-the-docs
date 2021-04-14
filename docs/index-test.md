@@ -4,6 +4,7 @@ title: Markdown kitchen sink
 nav_order: 99
 ---
 
+{% unless site.toggle_color_scheme and site.toggle_color_scheme != "nil"  %}
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
 
 <script>
@@ -19,6 +20,7 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
   }
 });
 </script>
+{% endunless %}
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 

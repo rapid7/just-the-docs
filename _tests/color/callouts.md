@@ -7,6 +7,7 @@ parent: Color
 
 The configuration of the callouts shown below is in [`_config_tests.yml`](https://github.com/pdmosses/just-the-docs/blob/callouts/_config_tests.yml).
 
+{% unless site.toggle_color_scheme and site.toggle_color_scheme != "nil"  %}
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
 
 <script>
@@ -22,6 +23,7 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
   }
 });
 </script>
+{% endunless %}
 
 ## Admonition
 

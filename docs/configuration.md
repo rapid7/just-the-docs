@@ -130,9 +130,10 @@ _note: `footer_content` is deprecated, but still supported. For a better experie
 ## Color scheme
 
 ```yaml
-# Color scheme supports "light" (default) and "dark"
+# Color scheme supports "dark", "light", and your custom schemes:
 color_scheme: dark
 ```
+{% unless site.toggle_color_scheme and site.toggle_color_scheme != "nil"  %}
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
 
 <script>
@@ -148,8 +149,26 @@ jtd.addEvent(toggleDarkMode, 'click', function(){
   }
 });
 </script>
-
+{% endunless %}
 See [Customization]({{ site.baseurl }}{% link docs/customization.md %}) for more information.
+
+## Toggle between two schemes
+
+New
+{: .label .label-green }
+
+```yaml
+# color_scheme: nil                # default: light
+# To add a button to switch all pages to a different scheme:
+toggle_color_scheme: dark          # default: nil (no toggle button)
+# To display the toggle button only on one page:
+toggle_page_url: "/"               # default: nil (display on all pages)
+# To toggle automatically when the system mode preference changes:
+toggle_auto_mode: true             # default: nil (manual toggle)
+# To set the button text for toggling and reverting:
+# toggle_text_1: "&rarr; &#x26ab;" # default: "&rarr; Dark Mode"
+# toggle_text_2: "&rarr; &#x26ab;" # default: "&rarr; Light Mode"
+```
 
 ## Callouts
 
