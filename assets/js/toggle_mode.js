@@ -13,7 +13,7 @@
   {% endif %}
 
   {% if site.toggle_text_2 %}
-    {% assign toggle_text_2 = site.toggle_text_ %}
+    {% assign toggle_text_2 = site.toggle_text_2 %}
   {% else %}
     {% assign toggle_text_2 = "&rarr; Light Mode" %}
   {% endif %}
