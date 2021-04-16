@@ -18,13 +18,13 @@
 {% unless include.parent_page == nil and include.page.nav_exclude %}
 <nav class="nav-rel">
   {% if include.prev_page %}
-    <a href="{{ include.prev_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
+    <a href="{{ include.prev_page.url | relative_url }}" class="nav-rel-link">{{ site.nav_prev_text | default: "&larr;" }}</a>
   {% endif %}
   {% if include.parent_page %}
-    <a href="{{ include.parent_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&uarr;" }}</a>
+    <a href="{{ include.parent_page.url | relative_url }}" class="nav-rel-link">{{ site.nav_up_text | default: "&uarr;" }}</a>
   {% endif %}
   {% if include.next_page %}
-    <a href="{{ include.next_page.url | absolute_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
+    <a href="{{ include.next_page.url | relative_url }}" class="nav-rel-link">{{ site.nav_next_text | default: "&rarr;" }}</a>
   {% endif %}
 </nav>
 {% endunless %}
@@ -35,7 +35,7 @@
   <ol class="breadcrumb-nav-list">
     {%- for node in include.nodes -%}
     <li class="breadcrumb-nav-list-item">
-      <a href="{{ node.url | absolute_url }}">{{ node.title }}</a>
+      <a href="{{ node.url | relative_url }}">{{ node.title }}</a>
     </li>
     {%- endfor -%}
     <li class="breadcrumb-nav-list-item">

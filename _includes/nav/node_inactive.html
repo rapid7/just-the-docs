@@ -34,7 +34,7 @@
     <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
   {%- endif -%}
   
-  <a href="{{ node.url | absolute_url }}" class="nav-list-link">{{ node.title }}</a>
+  <a href="{{ node.url | relative_url }}" class="nav-list-link">{{ node.title }}</a>
 
 {%- capture nav_newline %}
 {% endcapture -%}
