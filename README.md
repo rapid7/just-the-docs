@@ -1,3 +1,18 @@
+Note: This is a temporary fork of https://github.com/pmarsceill/just-the-docs which will be deleted after the required pull requests have been merged upstream.
+
+Current list of changes:
+
+```
+git checkout r7_ver_custom
+
+# https://github.com/pmarsceill/just-the-docs/pull/578
+git remote add upstream-podmosses git@github.com:pdmosses/just-the-docs.git
+git fetch upstream-podmosses combination-rec-nav
+git merge -S --no-ff --edit upstream-podmosses/combination-rec-nav
+```
+
+---
+
 <p align="right">
     <a href="https://badge.fury.io/rb/just-the-docs"><img src="https://badge.fury.io/rb/just-the-docs.svg" alt="Gem version"></a> <a href="https://github.com/pmarsceill/just-the-docs/actions?query=workflow%3A%22Master+branch+CI%22"><img src="https://github.com/pmarsceill/just-the-docs/workflows/Master%20branch%20CI/badge.svg" alt="Build status"></a>
 </p>
