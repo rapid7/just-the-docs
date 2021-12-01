@@ -53,7 +53,7 @@
       {%- assign nav_active = false -%}
     {%- endif -%}
 
-    {%- if nav_active or site.nav_cache == false or node.parent -%}
+    {%- if true or site.nav_cache == false or node.parent -%}
       {%- include nav/node.html
             node = node
             path = nav_path
