@@ -18,6 +18,25 @@
       @include fs-3;
     }
 
+    // Showing visual guidelines for deeply nested menus
+    .nav-list-item .nav-list-item {
+      border-left: 1px solid #d5dee3;
+    }
+    .nav-list-item .nav-list-item .nav-list-item {
+      border-left: 2px dashed #d5dee3;
+      margin-left: 1rem;
+    }
+    .nav-list-item .nav-list-item .nav-list-item a.nav-list-link {
+      padding-left: 1rem;
+    }
+    .nav-list-item .nav-list-item .nav-list-item .nav-list-item {
+      border-left: 2px dashed #d5dee3;
+      margin-left: 0.5rem;
+    }
+    .nav-list-item .nav-list-item .nav-list-item .nav-list-item a.nav-list-link {
+      padding-left: 0.5rem;
+    }
+
     .nav-list-link {
       display: block;
       min-height: $nav-list-item-height-sm;
@@ -65,21 +84,24 @@
       @if $nav-list-expander-right {
         right: 0;
       }
-      width: $nav-list-item-height-sm;
+      width: $nav-list-item-height-sm + 0.5rem;
       height: $nav-list-item-height-sm;
       padding-top: #{$nav-list-item-height-sm / 4};
-      padding-right: #{$nav-list-item-height-sm / 4};
+      padding-right: #{($nav-list-item-height-sm / 4) + 0.5rem};
       padding-bottom: #{$nav-list-item-height-sm / 4};
       padding-left: #{$nav-list-item-height-sm / 4};
+      background-size: $nav-list-item-height-sm;
+      background-repeat: no-repeat;
       color: $link-color;
 
       @include mq(md) {
-        width: $nav-list-item-height;
+        width: $nav-list-item-height + 0.5rem;
         height: $nav-list-item-height;
         padding-top: #{$nav-list-item-height / 4};
-        padding-right: #{$nav-list-item-height / 4};
+        padding-right: #{($nav-list-item-height / 4) + 0.5rem};
         padding-bottom: #{$nav-list-item-height / 4};
         padding-left: #{$nav-list-item-height / 4};
+        background-size: $nav-list-item-height;
       }
 
       &:hover {
@@ -160,7 +182,7 @@
 
     > .nav-list {
       padding: 0;
-      
+
       > .nav-list-item {
         > .nav-list-link {
           color: $link-color;
@@ -243,7 +265,7 @@
 nav.nav-rel {
   float: right;
   margin-bottom: $sp-3;
-  
+
   @include mq(md) {
     margin-top: -$sp-4;
   }
