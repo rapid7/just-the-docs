@@ -21,6 +21,33 @@ jtd.onReady = function(ready) {
   });
 }
 
+// Returns a function, that when invoked, will only run at most once within
+// the required timeframe. This reduces the rate at which a function will be
+// called
+jtd.throttle = function (func, limit) {
+  limit = limit || 200;
+  var timeoutId;
+  var previousTime;
+  var context;
+  var args;
+  return function () {
+    context = this;
+    args = arguments;
+    if (!previousTime) {
+      func.apply(context, args);
+      previousTime = Date.now();
+    } else {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(function () {
+        if (Date.now() - previousTime >= limit) {
+          func.apply(context, args);
+          previousTime = Date.now();
+        }
+      }, limit - (Date.now() - previousTime));
+    }
+  };
+}
+
 // Show/hide mobile menu
 
 function initNav() {
@@ -462,13 +489,31 @@ jtd.setTheme = function(theme) {
 // Scroll site-nav to ensure the link to the current page is visible
 
 function scrollNav() {
-  const href = document.location.pathname.replace(/(\/.*)\/+$/, "$1");
-  const siteNav = document.getElementById('site-nav');
-  const targetLink = siteNav.querySelector('a[href="' + href + '"], a[href="' + href + '/"]');
-  if(targetLink){
-    const rect = targetLink.getBoundingClientRect();
-    siteNav.scrollBy(0, rect.top - 3*rect.height);
+  var href = document.location.pathname.replace(/(\/.*)\/+$/, "$1");
+  var siteNav = document.getElementById('site-nav');
+  var targetNavLink = siteNav.querySelector('a[href="' + href + '"], a[href="' + href + '/"]');
+
+  // Keep track of the scroll position in localStorage so it can be restored on the next page visit
+  jtd.addEvent(siteNav, 'scroll', jtd.throttle(function (e) {
+    window.localStorage.siteNavScrollTop = Math.floor(e.target.scrollTop);
+  }), 100);
+
+  // Scroll to the required position
+  var previousScrollPosition = Number(window.localStorage.siteNavScrollTop) || 0;
+  var newSiteNavScrollPosition = previousScrollPosition;
+
+  // Calculate if the target link is visible, otherwise scroll to a better position
+  if (targetNavLink) {
+    var siteNavBoundingRect = siteNav.getBoundingClientRect();
+    var targetLinkBoundingRect = targetNavLink.getBoundingClientRect();
+    var isTargetNavListItemVisible = previousScrollPosition <= targetLinkBoundingRect.top && targetLinkBoundingRect.bottom <= previousScrollPosition + siteNavBoundingRect.bottom;
+
+    if (!isTargetNavListItemVisible) {
+      newSiteNavScrollPosition = targetLinkBoundingRect.top - (3 * targetLinkBoundingRect.height);
+    }
   }
+
+  siteNav.scrollTop = newSiteNavScrollPosition;
 }
 
 // Document ready
