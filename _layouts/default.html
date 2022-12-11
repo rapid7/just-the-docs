@@ -166,4 +166,7 @@ layout: table_wrappers
   <script type="text/javascript" src="{{ '/assets/js/toggle_mode.js' | relative_url }}"></script>
 
 </body>
+{% if site.mermaid_enabled != false %}
+  {%- include mermaid_init.html -%}
+{% endif %}
 </html>
