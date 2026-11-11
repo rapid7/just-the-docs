@@ -29,7 +29,13 @@
     <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
   {%- endif -%}
 
-  <a href="{{ node.url | relative_url }}" class="nav-list-link{% if include.active %} active{% endif %}">{{ node.title }}</a>
+  {%- if node.href and node.external -%}
+    <a href="{{ node.href }}" class="nav-list-link{% if include.active %} active{% endif %}" target="_blank" rel="noopener noreferrer">{{ node.title }}</a>
+  {%- elsif node.href -%}
+    <a href="{{ node.href }}" class="nav-list-link{% if include.active %} active{% endif %}">{{ node.title }}</a>
+  {%- else -%}
+    <a href="{{ node.url | relative_url }}" class="nav-list-link{% if include.active %} active{% endif %}">{{ node.title }}</a>
+  {%- endif -%}
 
   {%- if nav_sorted.size >= 1 -%}
     {%- if nav_page_path == include.path -%}

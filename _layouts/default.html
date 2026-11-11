@@ -55,9 +55,6 @@ layout: table_wrappers
     <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav">
       {% include nav/main.html page=page %}
     </nav>
-    <footer class="site-footer">
-      This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
-    </footer>
   </div>
   <div class="main" id="top">
     <div id="main-header" class="main-header">
@@ -125,6 +122,10 @@ layout: table_wrappers
             {% endif %}
 
             {{ footer_custom }}
+
+            <p class="text-small text-grey-dk-000 mb-0">
+              This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+            </p>
 
             {% if site.last_edit_timestamp or site.gh_edit_link %}
               <div class="d-flex mt-2">

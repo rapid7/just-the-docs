@@ -34,7 +34,13 @@
     <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
   {%- endif -%}
   
-  <a href="{{ node.url | relative_url }}" class="nav-list-link">{{ node.title }}</a>
+  {%- if node.href and node.external -%}
+    <a href="{{ node.href }}" class="nav-list-link" target="_blank" rel="noopener noreferrer">{{ node.title }}</a>
+  {%- elsif node.href -%}
+    <a href="{{ node.href }}" class="nav-list-link">{{ node.title }}</a>
+  {%- else -%}
+    <a href="{{ node.url | relative_url }}" class="nav-list-link">{{ node.title }}</a>
+  {%- endif -%}
 
 {%- capture nav_newline %}
 {% endcapture -%}
